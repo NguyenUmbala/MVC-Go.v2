@@ -12,8 +12,8 @@ var err error
 
 type Person struct {
 	ID       uint   `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"username" form:"username"`
+	Password string `json:"password" form:"password"`
 }
 
 type Account struct {
@@ -21,14 +21,18 @@ type Account struct {
 	password string `form:"password" json:"password" binding:"required"`
 }
 
-func Login(acc Account) bool {
+func SignUp(person Person) {
+	db.Save(&person)
+}
+
+func Login(acc Person) bool {
 	var person Person
 
-	if err := db.Where("username = ?", acc.username).First(&person).Error; err != nil {
+	if err := db.Where("username = ?", acc.Username).First(&person).Error; err != nil {
 		fmt.Println(err)
 		return false
 	}
-	if person.Password != acc.password {
+	if person.Password != acc.Password {
 		return false
 	}
 

@@ -9,7 +9,8 @@ func main() {
 	router.LoadHTMLGlob("views/*")
 
 	router.GET("/", controllers.GetHTML)
-	router.POST("/", controllers.Login)
+	router.POST("/login", controllers.Login)
+	router.POST("/signup", controllers.SignUp)
 
 	router.Run(":8080")
 }

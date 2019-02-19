@@ -19,14 +19,31 @@ func GetHTML(c *gin.Context) {
 	})
 }
 
+func SignUp(c *gin.Context) {
+	models.OpenConnection()
+	defer models.CloseConnection()
+
+	person := models.Person{
+		Username: c.PostForm("username"),
+		Password: c.PostForm("password"),
+	}
+
+	models.SignUp(person)
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"noti": "Đăng kí thành công",
+	})
+}
+
 func Login(c *gin.Context) {
 	models.OpenConnection()
 	defer models.CloseConnection()
 
-	var acc models.Account
-	c.BindJSON(&acc)
+	person := models.Person{
+		Username: c.PostForm("username"),
+		Password: c.PostForm("password"),
+	}
 
-	if models.Login(acc) {
+	if models.Login(person) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"noti": "Đăng nhập thành công",
 		})

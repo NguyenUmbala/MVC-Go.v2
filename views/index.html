@@ -35,7 +35,7 @@
 		<!-- FORM TO CREATE TODOS -->
 		<div id="todo-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form name="form" method="POST" action="/">
+				<form name="form" method="POST">
 					<div class="form-group">
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
 						<input type="text" name="username" class="form-control input-lg text-center" placeholder="Username">
@@ -46,7 +46,8 @@
 					</div>
 
 					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" >Add</button>
+					<button type="submit" class="btn btn-primary btn-lg" formaction="/signup" >Sign up</button>
+					<button type="submit" class="btn btn-primary btn-lg" formaction="/login" >Sign in</button>
 					<div name="noti">{{.noti}}</div>
 				</form>
 			</div>
